@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>${rootArtifactId}</artifactId>
+		<groupId>${groupId}</groupId>
+		<version>${version}</version>
+	</parent>
+	<artifactId>${artifactId}</artifactId>
+	<packaging>jar</packaging>
+	<name>${rootArtifactId} Service module</name>
+	<properties>
+		<eclipselink.version>2.5.2</eclipselink.version>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>com.sadad</groupId>
+			<artifactId>${rootArtifactId}-model</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.sadad</groupId>
+			<artifactId>sadad-card-persistence</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.sadad</groupId>
+			<artifactId>sadad-card-services</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.sadad</groupId>
+			<artifactId>sadad-card-util</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.persistence</groupId>
+			<artifactId>eclipselink</artifactId>
+			<version>${eclipselink.version}</version>
+		</dependency>
+	</dependencies>
+</project>

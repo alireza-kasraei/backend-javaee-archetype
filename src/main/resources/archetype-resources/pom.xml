@@ -1,0 +1,138 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>${groupId}</groupId>
+	<artifactId>${artifactId}</artifactId>
+	<version>${version}</version>
+	<packaging>pom</packaging>
+	<name>${artifactId} application</name>
+
+	<modules>
+		<module>${rootArtifactId}-model</module>
+		<module>${rootArtifactId}-service</module>
+		<module>${rootArtifactId}-web</module>
+	</modules>
+
+	<properties>
+		<java.version>1.7</java.version>
+		<log4j.version>2.10.0</log4j.version>
+		<slf4j.version>1.7.25</slf4j.version>
+		<lombok.version>1.16.14</lombok.version>
+		<javaee.version>6.0</javaee.version>
+		<sadad-card-base.version>0.0.1-SNAPSHOT</sadad-card-base.version>
+		<junit.version>4.12</junit.version>
+	</properties>
+
+
+	<dependencyManagement>
+		<dependencies>
+			<!-- framework -->
+			<dependency>
+				<groupId>com.sadad</groupId>
+				<artifactId>sadad-card-persistence-model</artifactId>
+				<version>${sadad-card-base.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.sadad</groupId>
+				<artifactId>sadad-card-persistence</artifactId>
+				<version>${sadad-card-base.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.sadad</groupId>
+				<artifactId>sadad-card-services</artifactId>
+				<version>${sadad-card-base.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.sadad</groupId>
+				<artifactId>sadad-card-util</artifactId>
+				<version>${sadad-card-base.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.sadad</groupId>
+				<artifactId>sadad-card-web</artifactId>
+				<version>${sadad-card-base.version}</version>
+			</dependency>
+			<!-- modules -->
+			<dependency>
+				<groupId>${groupId}</groupId>
+				<artifactId>${rootArtifactId}-model</artifactId>
+				<version>${version}</version>
+				<type>jar</type>
+				<scope>compile</scope>
+			</dependency>
+			<dependency>
+				<groupId>${groupId}</groupId>
+				<artifactId>${rootArtifactId}-service</artifactId>
+				<version>${version}</version>
+				<type>jar</type>
+				<scope>compile</scope>
+			</dependency>
+			<dependency>
+				<groupId>${groupId}</groupId>
+				<artifactId>${rootArtifactId}-web</artifactId>
+				<version>${version}</version>
+				<type>jar</type>
+				<scope>compile</scope>
+			</dependency>
+			<!-- common libraries -->
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>${junit.version}</version>
+				<scope>test</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+
+
+	<dependencies>
+		<dependency>
+			<groupId>javax</groupId>
+			<artifactId>javaee-api</artifactId>
+			<version>${javaee.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-slf4j-impl</artifactId>
+			<version>${log4j.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>${lombok.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.6.2</version>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+
+
+
+
+</project>
