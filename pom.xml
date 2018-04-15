@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.sadad</groupId>
@@ -47,4 +48,10 @@
 
 	<!-- <distributionManagement> <repository> <id>bintray</id> <url>https://api.bintray.com/maven/open-archetypes/maven/multi-javaee6-archetype</url> 
 		</repository> </distributionManagement> -->
+	<distributionManagement>
+		<snapshotRepository>
+			<id>nexus</id>
+			<url>http://192.168.54.50:9091/nexus/content/repositories/snapshots</url>
+		</snapshotRepository>
+	</distributionManagement>
 </project>
