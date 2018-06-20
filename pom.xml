@@ -5,7 +5,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.sadad</groupId>
 	<artifactId>multi-javaee6-archetype</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.2-SNAPSHOT</version>
 	<packaging>maven-archetype</packaging>
 	<name>Basic multi module Java EE 6 archetype</name>
 	<description>Generates a *very basic* multi module Java EE 6 project composed of a parent pom project and 3 nested modules : Model Module, Service Module, Web Module</description>
