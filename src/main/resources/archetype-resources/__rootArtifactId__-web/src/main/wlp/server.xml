@@ -1,0 +1,48 @@
+<server description="${rootArtifactId}">
+
+	<featureManager>
+		<feature>localConnector-1.0</feature>
+		<feature>jaxrs-2.0</feature>
+		<feature>jpa-2.1</feature>
+		<feature>cdi-1.2</feature>
+		<feature>beanValidation-1.1</feature>
+		<feature>jdbc-4.1</feature>
+		<feature>managedBeans-1.0</feature>
+		<feature>servlet-3.1</feature>
+		<feature>jndi-1.0</feature>
+		<feature>ejbLite-3.2</feature>
+	</featureManager>
+
+
+	<basicRegistry id="basic" realm="BasicRealm">
+	</basicRegistry>
+
+
+	<httpEndpoint host="*" httpPort="9081" httpsPort="9443"
+		id="defaultHttpEndpoint" />
+
+	<applicationManager autoExpand="true" />
+
+
+	<applicationMonitor updateTrigger="mbean" />
+
+	<library id="jdbcDriverFiles">
+		<fileset dir="${db2DriverLocation}"
+			includes="db2jcc4.jar db2jcc4_license_cisuz.jar db2jcc4_license_cu.jar" />
+	</library>
+
+
+	<!-- <dataSource id="db2" jndiName="CardBase"
+		type="javax.sql.DataSource">
+		<jdbcDriver libraryRef="jdbcDriverFiles" />
+		<properties.db2.jcc databaseName="cardbase"
+			driverType="4" password="DB@Admin@@123" portNumber="50000"
+			serverName="192.168.54.50" user="db2admin" />
+	</dataSource> -->
+	
+	<application name="${rootArtifactId}" context-root="/${rootArtifactId}" location="${appLocation}.war" type="war"/>
+
+
+
+
+</server>

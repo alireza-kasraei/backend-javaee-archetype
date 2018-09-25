@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<archetype-descriptor name="multi-javaee6-archetype">
+<archetype-descriptor name="multi-javaee7-archetype">
  <!-- <requiredProperties>
    <requiredProperty key="enable_openshift">
      <defaultValue>yes</defaultValue>
@@ -83,6 +83,12 @@
         </fileSet>
         <fileSet encoding="UTF-8">
           <directory>src/main/webapp/resources</directory>
+          <includes>
+            <include>**/*</include>
+          </includes>
+        </fileSet>        
+        <fileSet encoding="UTF-8">
+          <directory>src/main/webapp/wlp</directory>
           <includes>
             <include>**/*</include>
           </includes>

@@ -1,8 +1,10 @@
 #set( $symbol_pound = '#' )
 #set( $symbol_dollar = '$' )
-#set( $symbol_escape = '\' )
+#set(
+$symbol_escape = '\' )
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>${groupId}</groupId>
@@ -18,14 +20,18 @@
 	</modules>
 
 	<properties>
+		<liberty.version>8.5.5.8</liberty.version>
 		<java.version>1.7</java.version>
 		<log4j.version>2.10.0</log4j.version>
 		<slf4j.version>1.7.25</slf4j.version>
 		<lombok.version>1.16.14</lombok.version>
-		<javaee.version>6.0</javaee.version>
-		<sadad-card-base.version>0.0.2-SNAPSHOT</sadad-card-base.version>
+		<javaee.version>7.0</javaee.version>
+		<sadad-card-base.version>0.1.0-SNAPSHOT</sadad-card-base.version>
 		<junit.version>4.12</junit.version>
 		<model-mapper.version>1.1.0</model-mapper.version>
+		<client.security.version>3.4.1</client.security.version>
+		<arquillian.suite.extension.version>1.2.0</arquillian.suite.extension.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
 
@@ -91,6 +97,17 @@
 				<artifactId>modelmapper</artifactId>
 				<version>${model-mapper.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>org.eu.ingwar.tools</groupId>
+				<artifactId>arquillian-suite-extension</artifactId>
+				<version>${arquillian.suite.extension.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>ir.bmi.identity</groupId>
+				<artifactId>client-security-api</artifactId>
+				<version>${client.security.version}</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
@@ -98,22 +115,22 @@
 
 	<dependencies>
 		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
 			<groupId>javax</groupId>
 			<artifactId>javaee-api</artifactId>
 			<version>${javaee.version}</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.apache.logging.log4j</groupId>
-			<artifactId>log4j-slf4j-impl</artifactId>
-			<version>${log4j.version}</version>
-		</dependency>
-		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
 			<version>${slf4j.version}</version>
 		</dependency>
-
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
@@ -124,6 +141,15 @@
 	</dependencies>
 
 	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>net.wasdev.wlp.maven.plugins</groupId>
+					<artifactId>liberty-maven-plugin</artifactId>
+					<version>2.5</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -136,6 +162,30 @@
 			</plugin>
 		</plugins>
 	</build>
+
+	<profiles>
+		<profile>
+			<id>sonar</id>
+			<build>
+				<pluginManagement>
+					<plugins>
+						<plugin>
+							<groupId>org.sonarsource.scanner.maven</groupId>
+							<artifactId>sonar-maven-plugin</artifactId>
+							<version>${sonar.version}</version>
+						</plugin>
+					</plugins>
+				</pluginManagement>
+			</build>
+		</profile>
+	</profiles>
+
+	<distributionManagement>
+		<snapshotRepository>
+			<id>nexus</id>
+			<url>http://192.168.54.97:8081/nexus/content/repositories/snapshots</url>
+		</snapshotRepository>
+	</distributionManagement>
 
 
 

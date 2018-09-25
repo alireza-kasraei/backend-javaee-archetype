@@ -1,16 +1,27 @@
 package ${package}.${module-name}.sample;
 
-import javax.ejb.Stateless;
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
 /**
  * 
  *
  */
-@Stateless
-public class SampleServiceImpl implements SampleService {
+@ApplicationScoped
+class SampleServiceImpl implements SampleService {
 
-	@Inject
-	private SampleRepository sampleRepository;
+	//maybe its better to use constructor or setter injection
+	//uncomment while you setup JPA
+	//@Inject
+	//private SampleRepository sampleRepository;
+	
+	
+	@Override
+	public String sayHello() {
+		return "Hello From ${rootArtifactId}";
+	}
+	
+	
+	
 
 }
