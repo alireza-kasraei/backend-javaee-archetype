@@ -8,7 +8,7 @@
 		<servlet-class>com.ibm.websphere.jaxrs.server.IBMRestServlet</servlet-class>
 		<init-param>
 			<param-name>javax.ws.rs.Application</param-name>
-			<param-value>${package}.${module-name}.JaxRsActivator</param-value>
+			<param-value>${package}.JaxRsActivator</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
@@ -19,7 +19,7 @@
 
 	<servlet>
 		<servlet-name>SwaggerBootstrap</servlet-name>
-		<servlet-class>${package}.${module-name}.SwaggerBootstrap</servlet-class>
+		<servlet-class>${package}.SwaggerBootstrap</servlet-class>
 		<load-on-startup>2</load-on-startup>
 	</servlet>
 

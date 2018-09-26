@@ -1,4 +1,4 @@
-package ${package}.${module-name};
+package ${package};
 
 import com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider;
 import com.sadad.web.exception.mapper.InvalidArgumentsExceptionMapper;

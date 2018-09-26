@@ -1,4 +1,4 @@
-package ${package}.${module-name};
+package ${package};
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
