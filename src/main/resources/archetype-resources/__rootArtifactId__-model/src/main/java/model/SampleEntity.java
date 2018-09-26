@@ -2,7 +2,7 @@
 #set( $symbol_dollar = '$' )
 #set( $symbol_escape = '\' )
 
-package ${package}.${module-name}.model;
+package ${package}.model;
 
 
 import javax.persistence.Column;

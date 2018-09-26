@@ -10,7 +10,7 @@ import javax.ws.rs.core.Application;
 import java.util.HashSet;
 import java.util.Set;
 
-import ${package}.${module-name}.sample.SampleRestController;
+import ${package}.${module-name}.SampleRestController;
 
 /**
  * A class extending {@link Application} and annotated with @ApplicationPath is

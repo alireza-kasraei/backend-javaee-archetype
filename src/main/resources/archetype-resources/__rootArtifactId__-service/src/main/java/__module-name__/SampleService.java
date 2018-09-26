@@ -1,6 +1,4 @@
-package ${package}.${module-name}.sample;
-
-import javax.ejb.Local;
+package ${package}.${module-name};
 
 /**
  * public API for our sample service

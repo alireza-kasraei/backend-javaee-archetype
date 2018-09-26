@@ -1,6 +1,6 @@
-package ${package}.${module-name}.sample;
+package ${package}.${module-name};
 
-import ${package}.${module-name}.model.SampleEntity;
+import ${package}.model.SampleEntity;
 import com.sadad.persistence.repository.CrudRepository;
 
 //

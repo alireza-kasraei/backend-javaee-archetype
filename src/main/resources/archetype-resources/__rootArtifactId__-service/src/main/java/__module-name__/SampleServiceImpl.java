@@ -1,4 +1,4 @@
-package ${package}.${module-name}.sample;
+package ${package}.${module-name};
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
