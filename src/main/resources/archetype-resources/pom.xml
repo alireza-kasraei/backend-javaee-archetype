@@ -160,6 +160,25 @@ $symbol_escape = '\' )
 					<target>${java.version}</target>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>io.fabric8</groupId>
+				<artifactId>docker-maven-plugin</artifactId>
+				<version>0.26.1</version>
+				<configuration>
+					<images>
+						<image>
+							<name>sadad-card/${rootArtifactId}</name>
+							<build>
+								<tags>
+									<!-- <tag>${project.artifactId}</tag> -->
+									<tag>${project.version}</tag>
+								</tags>
+								<!--<dockerFile>./Dockerfile</dockerFile> -->
+							</build>
+						</image>
+					</images>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 
