@@ -36,11 +36,6 @@
 			<version>${log4j.version}</version>
 		</dependency>
 
-		<dependency>
-			<groupId>org.modelmapper</groupId>
-			<artifactId>modelmapper</artifactId>
-			<version>${model-mapper.version}</version>
-		</dependency>
 
 		<dependency>
 			<groupId>io.swagger</groupId>
@@ -135,6 +130,49 @@
 						</goals>
 					</execution>
 				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>install-jar</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>copy</goal>
+						</goals>
+						<configuration>
+							<artifactItems>
+								<artifactItem>
+									<groupId>org.apache.derby</groupId>
+									<artifactId>derby</artifactId>
+									<version>10.12.1.1</version>
+								</artifactItem>
+							</artifactItems>
+							<outputDirectory>${project.build.directory}/liberty/wlp/usr/shared/resources/derby</outputDirectory>
+							<stripVersion>true</stripVersion>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>io.fabric8</groupId>
+				<artifactId>docker-maven-plugin</artifactId>
+				<version>0.26.1</version>
+				<configuration>
+					<images>
+						<image>
+							<name>sadad-card/${rootArtifactId}</name>
+							<build>
+								<tags>
+									<!-- <tag>${project.artifactId}</tag> -->
+									<tag>${project.version}</tag>
+								</tags>
+								<dockerFile>${project.basedir}/Dockerfile</dockerFile>
+							</build>
+						</image>
+					</images>
+				</configuration>
 			</plugin>
 		</plugins>
 

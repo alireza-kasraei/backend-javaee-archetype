@@ -13,12 +13,6 @@
 			</includes>
 		</fileSet>
 		<fileSet filtered="false" packaged="false" encoding="UTF-8">
-			<directory>libs/db2</directory>
-			<includes>
-				<include>**/*</include>
-			</includes>
-		</fileSet>
-		<fileSet filtered="false" packaged="false" encoding="UTF-8">
 			<directory>script</directory>
 			<includes>
 				<include>**/*</include>
@@ -31,15 +25,8 @@
 			</includes>
 		</fileSet>
 		<fileSet filtered="true" packaged="false" encoding="UTF-8">
-			<directory>docker</directory>
-			<includes>
-				<include>**/*</include>
-			</includes>
-		</fileSet>
-		<fileSet filtered="true" packaged="false" encoding="UTF-8">
 			<directory></directory>
 			<includes>
-				<include>Dockerfile</include>
 				<include>Jenkinsfile</include>
 				<include>README.md</include>
 			</includes>
@@ -151,6 +138,18 @@
 				</fileSet>
 				<fileSet filtered="true" packaged="false" encoding="UTF-8">
 					<directory>src/test/resources</directory>
+					<includes>
+						<include>**/*</include>
+					</includes>
+				</fileSet>
+				<fileSet filtered="true" packaged="false" encoding="UTF-8">
+					<directory></directory>
+					<includes>
+						<include>Dockerfile</include>
+					</includes>
+				</fileSet>
+				<fileSet filtered="true" packaged="false" encoding="UTF-8">
+					<directory>docker</directory>
 					<includes>
 						<include>**/*</include>
 					</includes>

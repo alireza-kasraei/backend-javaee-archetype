@@ -19,28 +19,30 @@
 
 
 
-	<httpEndpoint host="*" httpPort="9085" httpsPort="9453"
+	<basicRegistry id="basic" realm="BasicRealm">
+	</basicRegistry>
+
+
+	<httpEndpoint host="*" httpPort="9080" httpsPort="9443"
 		id="defaultHttpEndpoint" />
+
+	<applicationManager autoExpand="true" />
 
 
 	<applicationMonitor updateTrigger="mbean" />
 
 
 
-	<library id="jdbcDriverFiles">
-		<fileset dir="${db2DriverLocation}"
-			includes="db2jcc4.jar db2jcc4_license_cisuz.jar db2jcc4_license_cu.jar" />
-	</library>
-
-
-
-	<!-- <dataSource id="db2" jndiName="CardBase"
-		type="javax.sql.DataSource">
+	<dataSource id="DefaultDataSource"
+		jndiName="jdbc/derbyEmbedded">
 		<jdbcDriver libraryRef="jdbcDriverFiles" />
-		<properties.db2.jcc databaseName="cardbase"
-			driverType="4" password="DB@Admin@@123" portNumber="50000"
-			serverName="192.168.54.50" user="db2admin" />
-	</dataSource> -->
+		<properties.derby.embedded
+			databaseName="SAMPLEDB" createDatabase="create" />
+	</dataSource>
+
+	<library id="jdbcDriverFiles">
+		<file name="${shared.resource.dir}/derby/derby.jar" />
+	</library>
 
 
 

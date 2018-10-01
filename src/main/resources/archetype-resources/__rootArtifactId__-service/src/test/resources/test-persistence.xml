@@ -3,16 +3,19 @@
 			 version="2.0">
 
 	<persistence-unit name="pu" transaction-type="JTA">
+		<!-- choose your own provider -->
 		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+		<!-- choose your own data source -->
+		<jta-data-source>jdbc/derbyEmbedded</jta-data-source>
 
-		<jta-data-source>DS</jta-data-source>
+		<class>${package}.model.SampleEntity</class>
 
-		<exclude-unlisted-classes>false</exclude-unlisted-classes>
+		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 
 		<properties>
 			<property name="eclipselink.target-server" value="WebSphere_Liberty" />
 			<property name="javax.persistence.jdbc.driver" value="jdbcDriverFiles" />
-			<property name="eclipselink.logging.level" value="FINEST" />
+			<property name="eclipselink.logging.level" value="INFO" />
 			<property name="eclipselink.ddl-generation" value="create-or-extend-tables" />
 			<property name="eclipselink.cache.shared.default" value="false" />
 			<property name="eclipselink.deploy-on-startup" value="true" />

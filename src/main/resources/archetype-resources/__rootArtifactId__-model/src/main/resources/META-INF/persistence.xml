@@ -6,9 +6,9 @@
 		<!-- choose your own provider -->
 		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
 		<!-- choose your own data source -->
-		<jta-data-source>DS</jta-data-source>
+		<jta-data-source>jdbc/derbyEmbedded</jta-data-source>
 
-		<class>${package}.${module-name}.model.SampleEntity</class>
+		<class>${package}.model.SampleEntity</class>
 
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 

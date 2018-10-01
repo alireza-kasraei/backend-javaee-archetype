@@ -26,10 +26,20 @@
 
 	<applicationMonitor updateTrigger="mbean" />
 
+	<dataSource id="DefaultDataSource" jndiName="jdbc/derbyEmbedded">
+    	<jdbcDriver libraryRef="jdbcDriverFiles"/>
+    	<properties.derby.embedded databaseName="SAMPLEDB" createDatabase="create"/>
+	</dataSource>
+
 	<library id="jdbcDriverFiles">
+	    <!-- <fileset dir="C:/db-derby-x.x.x.x-bin/lib"/> -->
+	    <file name="${shared.resource.dir}/derby/derby.jar" />
+	</library>
+
+	<!-- <library id="jdbcDriverFiles">
 		<fileset dir="${db2DriverLocation}"
 			includes="db2jcc4.jar db2jcc4_license_cisuz.jar db2jcc4_license_cu.jar" />
-	</library>
+	</library> -->
 
 
 	<!-- <dataSource id="db2" jndiName="CardBase"

@@ -40,6 +40,11 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+		
+		<dependency>
+			<groupId>org.modelmapper</groupId>
+			<artifactId>modelmapper</artifactId>
+		</dependency>
 
 
 		<dependency>
@@ -103,9 +108,9 @@
 								<type>zip</type>
 							</assemblyArtifact>
 							<configFile>src/test/resources/test-server.xml</configFile>
-							<bootstrapProperties>
+							<!-- <bootstrapProperties>
 								<db2DriverLocation>${project.basedir}/../libs/db2</db2DriverLocation>
-							</bootstrapProperties>
+							</bootstrapProperties> -->
 							<installAppPackages>all</installAppPackages>
 							<clean>true</clean>
 							<features>
@@ -133,6 +138,30 @@
 									<goal>create-server</goal>
 									<goal>configure-arquillian</goal>
 								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-dependency-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>install-jar</id>
+								<phase>process-test-resources</phase>
+								<goals>
+									<goal>copy</goal>
+								</goals>
+								<configuration>
+									<artifactItems>
+										<artifactItem>
+											<groupId>org.apache.derby</groupId>
+											<artifactId>derby</artifactId>
+											<version>10.12.1.1</version>
+										</artifactItem>
+									</artifactItems>
+									<outputDirectory>${project.build.directory}/liberty/wlp/usr/shared/resources/derby</outputDirectory>
+									<stripVersion>true</stripVersion>
+								</configuration>
 							</execution>
 						</executions>
 					</plugin>
