@@ -29,6 +29,6 @@ public class SampleServiceTest extends ServiceDeployment {
 	@Test
 	public void testSayHelloService() {
 		final String sayHello = sampleService.sayHello();
-		Assert.assertEquals("Hello From sample10", sayHello);
+		Assert.assertEquals("Hello From ${rootArtifactId}", sayHello);
 	}
 }

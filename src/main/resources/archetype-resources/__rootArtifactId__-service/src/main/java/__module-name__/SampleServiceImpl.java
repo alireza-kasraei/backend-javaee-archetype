@@ -22,7 +22,7 @@ class SampleServiceImpl implements SampleService {
 
 	@Override
 	public String sayHello() {
-		return "Hello From sample10";
+		return "Hello From ${rootArtifactId}";
 	}
 
 	@Override
