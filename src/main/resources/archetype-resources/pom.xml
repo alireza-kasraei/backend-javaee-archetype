@@ -1,7 +1,6 @@
 #set( $symbol_pound = '#' )
 #set( $symbol_dollar = '$' )
-#set(
-$symbol_escape = '\' )
+#set( $symbol_escape = '\' )
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -20,32 +19,35 @@ $symbol_escape = '\' )
 	</modules>
 
 	<properties>
-		<liberty.version>8.5.5.8</liberty.version>
-		<java.version>1.7</java.version>
+		<liberty.version>18.0.0.3</liberty.version>
+		<java.version>1.8</java.version>
 		<log4j.version>2.10.0</log4j.version>
 		<slf4j.version>1.7.25</slf4j.version>
 		<lombok.version>1.16.14</lombok.version>
-		<javaee.version>7.0</javaee.version>
 		<sadad-card-base.version>0.1.0-SNAPSHOT</sadad-card-base.version>
 		<junit.version>4.12</junit.version>
 		<model-mapper.version>1.1.0</model-mapper.version>
 		<client.security.version>3.4.1</client.security.version>
 		<arquillian.suite.extension.version>1.2.0</arquillian.suite.extension.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 	</properties>
 
 
 	<dependencyManagement>
 		<dependencies>
+			<!-- liberty BOM -->
+			<dependency>
+				<groupId>io.openliberty.features</groupId>
+				<artifactId>features-bom</artifactId>
+				<version>${liberty.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
 			<!-- framework -->
 			<dependency>
 				<groupId>com.sadad</groupId>
 				<artifactId>sadad-card-persistence-model</artifactId>
-				<version>${sadad-card-base.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>com.sadad</groupId>
-				<artifactId>sadad-card-persistence</artifactId>
 				<version>${sadad-card-base.version}</version>
 			</dependency>
 			<dependency>
@@ -117,14 +119,7 @@ $symbol_escape = '\' )
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>${junit.version}</version>
 			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>javax</groupId>
-			<artifactId>javaee-api</artifactId>
-			<version>${javaee.version}</version>
-			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -137,6 +132,19 @@ $symbol_escape = '\' )
 			<version>${lombok.version}</version>
 			<scope>provided</scope>
 		</dependency>
+		<!-- features for all modules -->
+		<dependency>
+			<groupId>io.openliberty.features</groupId>
+			<artifactId>cdi-2.0</artifactId>
+			<type>esa</type>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.openliberty.features</groupId>
+			<artifactId>mpConfig-1.3</artifactId>
+			<type>esa</type>
+			<scope>provided</scope>
+		</dependency>
 
 	</dependencies>
 
@@ -147,6 +155,21 @@ $symbol_escape = '\' )
 					<groupId>net.wasdev.wlp.maven.plugins</groupId>
 					<artifactId>liberty-maven-plugin</artifactId>
 					<version>2.5</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>2.18.1</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-war-plugin</artifactId>
+					<version>3.2.2</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-failsafe-plugin</artifactId>
+					<version>2.18.1</version>
 				</plugin>
 			</plugins>
 		</pluginManagement>
@@ -161,6 +184,12 @@ $symbol_escape = '\' )
 				</configuration>
 			</plugin>
 		</plugins>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
 	</build>
 
 	<profiles>
@@ -177,6 +206,20 @@ $symbol_escape = '\' )
 					</plugins>
 				</pluginManagement>
 			</build>
+		</profile>
+		<!-- Development environment -->
+		<profile>
+			<id>development</id>
+			<properties>
+				<db.username>dev-user</db.username>
+			</properties>
+		</profile>
+		<!-- Production environment -->
+		<profile>
+			<id>production</id>
+			<properties>
+				<db.username>prod-user</db.username>
+			</properties>
 		</profile>
 	</profiles>
 

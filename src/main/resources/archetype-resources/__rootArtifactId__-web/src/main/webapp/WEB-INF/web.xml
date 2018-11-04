@@ -17,11 +17,6 @@
 		<url-pattern>/rest/*</url-pattern>
 	</servlet-mapping>
 
-	<servlet>
-		<servlet-name>SwaggerBootstrap</servlet-name>
-		<servlet-class>${package}.SwaggerBootstrap</servlet-class>
-		<load-on-startup>2</load-on-startup>
-	</servlet>
 
 
 	<filter>

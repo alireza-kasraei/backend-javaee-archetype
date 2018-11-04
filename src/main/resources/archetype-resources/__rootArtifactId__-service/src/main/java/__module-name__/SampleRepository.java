@@ -1,9 +1,10 @@
 package ${package}.${module-name};
 
 import ${package}.model.SampleEntity;
-import com.sadad.persistence.repository.CrudRepository;
+import org.apache.deltaspike.data.api.FullEntityRepository;
+import org.apache.deltaspike.data.api.Repository;
 
 //
-interface SampleRepository extends CrudRepository<SampleEntity, Long> {
-
+@Repository
+interface SampleRepository extends FullEntityRepository<SampleEntity, Long> {
 }

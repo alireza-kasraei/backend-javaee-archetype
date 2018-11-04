@@ -13,8 +13,9 @@
 	<name>${rootArtifactId} Web module</name>
 
 	<properties>
-		<swager.version>1.5.16</swager.version>
-		<jackson.version>2.8.9</jackson.version>
+		<testServerHttpPort>9080</testServerHttpPort>
+		<testServerHttpsPort>9443</testServerHttpsPort>
+		<warContext>${rootArtifactId}</warContext>
 	</properties>
 
 	<dependencies>
@@ -36,48 +37,80 @@
 			<version>${log4j.version}</version>
 		</dependency>
 
-
 		<dependency>
-			<groupId>io.swagger</groupId>
-			<artifactId>swagger-jaxrs</artifactId>
-			<version>${swager.version}</version>
-			<exclusions>
-				<exclusion>
-					<groupId>javax.ws.rs</groupId>
-					<artifactId>jsr311-api</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>javax.validation</groupId>
-					<artifactId>validation-api</artifactId>
-				</exclusion>
-			</exclusions>
+			<groupId>org.modelmapper</groupId>
+			<artifactId>modelmapper</artifactId>
 		</dependency>
 
 		<dependency>
-			<groupId>com.fasterxml.jackson.jaxrs</groupId>
-			<artifactId>jackson-jaxrs-json-provider</artifactId>
-			<version>${jackson.version}</version>
+			<groupId>io.openliberty.features</groupId>
+			<artifactId>jaxrs-2.1</artifactId>
+			<type>esa</type>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.openliberty.features</groupId>
+			<artifactId>jsonp-1.1</artifactId>
+			<type>esa</type>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.openliberty.features</groupId>
+			<artifactId>jsonb-1.0</artifactId>
+			<type>esa</type>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.openliberty.features</groupId>
+			<artifactId>mpOpenAPI-1.0</artifactId>
+			<type>esa</type>
+			<scope>provided</scope>
 		</dependency>
 
-
 		<dependency>
-			<groupId>org.jboss.arquillian.protocol</groupId>
-			<artifactId>arquillian-protocol-servlet</artifactId>
-			<version>1.0.4.Final</version>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-rs-client</artifactId>
+			<version>3.1.11</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-rs-extension-providers</artifactId>
+			<version>3.1.11</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.glassfish</groupId>
+			<artifactId>javax.json</artifactId>
+			<version>1.0.4</version>
 			<scope>test</scope>
 		</dependency>
 
-		<dependency>
-			<groupId>org.eu.ingwar.tools</groupId>
-			<artifactId>arquillian-suite-extension</artifactId>
-			<scope>test</scope>
-		</dependency>
+
 	</dependencies>
 	<build>
-		<!-- <testResources> <testResource> <directory>src/test/resources</directory> 
-			</testResource> </testResources> -->
-
 		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+					<failOnMissingWebXml>false</failOnMissingWebXml>
+					<packagingExcludes>pom.xml</packagingExcludes>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>test</phase>
+						<id>default-test</id>
+						<configuration>
+							<reportsDirectory>${project.build.directory}/test-reports/unit</reportsDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 			<plugin>
 				<groupId>net.wasdev.wlp.maven.plugins</groupId>
 				<artifactId>liberty-maven-plugin</artifactId>
@@ -87,43 +120,49 @@
 					<installAppPackages>project</installAppPackages>
 					<appsDirectory>apps</appsDirectory>
 					<assemblyArtifact>
-						<!-- <groupId>com.sadad.was</groupId> <artifactId>wlp-javaee7-full</artifactId> 
-							<version>8.5.5.8</version> <type>zip</type> -->
-						<groupId>com.ibm.websphere.appserver.runtime</groupId>
-						<artifactId>wlp-webProfile7</artifactId>
+						<groupId>io.openliberty</groupId>
+						<artifactId>openliberty-runtime</artifactId>
 						<version>${liberty.version}</version>
 						<type>zip</type>
 					</assemblyArtifact>
 					<bootstrapProperties>
-						<appLocation>${project.build.finalName}</appLocation>
-						<db2DriverLocation>${project.basedir}/src/main/wlp/db2</db2DriverLocation>
+						<default.http.port>${testServerHttpPort}</default.http.port>
+						<default.https.port>${testServerHttpsPort}</default.https.port>
+						<app.context.root>${warContext}</app.context.root>
+						<app.location>${project.build.finalName}</app.location>
 					</bootstrapProperties>
 				</configuration>
 				<executions>
 					<execution>
-						<id>stop-server-before-clean</id>
-						<phase>pre-clean</phase>
-						<goals>
-							<goal>stop-server</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>create-server</id>
+						<id>install-liberty</id>
 						<phase>prepare-package</phase>
 						<goals>
 							<goal>install-server</goal>
-							<goal>create-server</goal>
 						</goals>
 					</execution>
 					<execution>
-						<id>install-apps</id>
-						<phase>package</phase>
+						<id>install-app</id>
+						<phase>pre-integration-test</phase>
 						<goals>
 							<goal>install-apps</goal>
 						</goals>
 					</execution>
 					<execution>
-						<id>package-server</id>
+						<id>start-server</id>
+						<phase>pre-integration-test</phase>
+						<goals>
+							<goal>test-start-server</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>stop-server</id>
+						<phase>post-integration-test</phase>
+						<goals>
+							<goal>test-stop-server</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>package-app</id>
 						<phase>package</phase>
 						<goals>
 							<goal>package-server</goal>
@@ -154,6 +193,60 @@
 						</configuration>
 					</execution>
 				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<version>3.0.0</version>
+				<executions>
+					<execution>
+						<id>add-integration-test-sources</id>
+						<phase>generate-test-sources</phase>
+						<goals>
+							<goal>add-test-source</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>src/it/java</source>
+							</sources>
+						</configuration>
+					</execution>
+					<execution>
+						<id>add-integration-test-resources</id>
+						<phase>generate-test-resources</phase>
+						<goals>
+							<goal>add-test-resource</goal>
+						</goals>
+						<configuration>
+							<resources>
+								<resource>
+									<directory>src/it/resources</directory>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-failsafe-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>integration-test</goal>
+						</goals>
+						<configuration>
+							<systemPropertyVariables>
+								<liberty.test.port>${testServerHttpPort}</liberty.test.port>
+								<war.name>${warContext}</war.name>
+							</systemPropertyVariables>
+						</configuration>
+					</execution>
+				</executions>
+				<configuration>
+					<summaryFile>${project.build.directory}/test-reports/it/failsafe-summary.xml</summaryFile>
+					<reportsDirectory>${project.build.directory}/test-reports/it</reportsDirectory>
+				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>io.fabric8</groupId>

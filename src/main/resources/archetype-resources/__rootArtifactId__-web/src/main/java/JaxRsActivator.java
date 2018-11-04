@@ -1,7 +1,5 @@
 package ${package};
 
-import com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider;
-import com.sadad.web.exception.mapper.InvalidArgumentsExceptionMapper;
 import com.sadad.web.exception.mapper.GeneralExceptionMapper;
 import com.sadad.web.exception.mapper.InvalidArgumentsExceptionMapper;
 
@@ -33,11 +31,6 @@ public class JaxRsActivator extends Application {
         // exception mappers
         addExceptionMappers(resources);
 
-        // swagger resources
-        resources.add(io.swagger.jaxrs.listing.ApiListingResource.class);
-        resources.add(io.swagger.jaxrs.listing.SwaggerSerializers.class);
-
-        resources.add(JacksonJaxbJsonProvider.class);
         return resources;
     }
 

@@ -15,5 +15,11 @@
 			<groupId>com.sadad</groupId>
 			<artifactId>sadad-card-persistence-model</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>io.openliberty.features</groupId>
+			<artifactId>jpa-2.1</artifactId>
+			<type>esa</type>
+			<scope>provided</scope>
+		</dependency>
 	</dependencies>
 </project>

@@ -24,6 +24,7 @@ public class ServiceDeployment {
 		archive.addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");
 		archive.addAsResource("test-log4j2.xml", "log4j2.xml");
 		archive.addAsResource("test-persistence.xml", "META-INF/persistence.xml");
+		archive.addAsResource("test-microprofile-config.properties", "META-INF/microprofile-config.properties");
 
 		archive.addPackages(true, EntityManagerFactoryBean.class.getPackage());
 
