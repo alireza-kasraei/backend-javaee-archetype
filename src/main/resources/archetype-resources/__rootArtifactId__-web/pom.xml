@@ -134,17 +134,32 @@
 				</configuration>
 				<executions>
 					<execution>
-						<id>install-liberty</id>
-						<phase>prepare-package</phase>
+						<id>stop-server-before-clean</id>
+						<phase>pre-clean</phase>
 						<goals>
-							<goal>install-server</goal>
+							<goal>stop-server</goal>
 						</goals>
 					</execution>
 					<execution>
-						<id>install-app</id>
-						<phase>pre-integration-test</phase>
+						<id>create-server</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>install-server</goal>
+							<goal>create-server</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>install-apps</id>
+						<phase>package</phase>
 						<goals>
 							<goal>install-apps</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>package-server</id>
+						<phase>package</phase>
+						<goals>
+							<goal>package-server</goal>
 						</goals>
 					</execution>
 					<execution>
@@ -159,13 +174,6 @@
 						<phase>post-integration-test</phase>
 						<goals>
 							<goal>test-stop-server</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>package-app</id>
-						<phase>package</phase>
-						<goals>
-							<goal>package-server</goal>
 						</goals>
 					</execution>
 				</executions>
