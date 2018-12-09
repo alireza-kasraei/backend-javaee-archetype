@@ -84,15 +84,6 @@
 			<artifactId>${rootArtifactId}-model</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>com.sadad</groupId>
-			<artifactId>sadad-card-services</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.sadad</groupId>
-			<artifactId>sadad-card-util</artifactId>
-		</dependency>
-		
-		<dependency>
 			<groupId>org.apache.deltaspike.modules</groupId>
 			<artifactId>deltaspike-data-module-api</artifactId>
 			<scope>compile</scope>

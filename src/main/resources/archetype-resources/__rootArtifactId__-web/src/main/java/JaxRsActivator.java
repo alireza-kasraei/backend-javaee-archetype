@@ -1,7 +1,5 @@
 package ${package};
 
-import com.sadad.web.exception.mapper.GeneralExceptionMapper;
-import com.sadad.web.exception.mapper.InvalidArgumentsExceptionMapper;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
@@ -37,8 +35,6 @@ public class JaxRsActivator extends Application {
 
 
     private void addExceptionMappers(Set<Class<?>> resources) {
-        resources.add(GeneralExceptionMapper.class);
-        resources.add(InvalidArgumentsExceptionMapper.class);
     }
 
 }

@@ -13,32 +13,33 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.sadad.persistence.entity.AbstractPersistableEntity;
 
 @Entity
 @Table(name = "SAMPLE")
-public class SampleEntity extends AbstractPersistableEntity<Long> {
+public class SampleEntity {
 
 	// private static final String SEQUENCE_NAME = "SAMPLE_SEQ";
 
-	private Long id;
-	private String sampleField;
-
-	@Override
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	// @SequenceGenerator(name = SEQUENCE_NAME, sequenceName = SEQUENCE_NAME,
 	// allocationSize = 100)
+	private Long id;
+	@Column(name = "FIELD_NAME")
+	private String sampleField;
+
+	
+	
 	public Long getId() {
 		return id;
 	}
 
-	@Override
+	
 	public void setId(Long id) {
 		this.id = id;
 	}
 
-	@Column(name = "FIELD_NAME")
+	
 	public String getSampleField() {
 		return sampleField;
 	}

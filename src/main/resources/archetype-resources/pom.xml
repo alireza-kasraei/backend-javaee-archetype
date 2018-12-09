@@ -24,7 +24,6 @@
 		<log4j.version>2.10.0</log4j.version>
 		<slf4j.version>1.7.25</slf4j.version>
 		<lombok.version>1.16.14</lombok.version>
-		<sadad-card-base.version>0.1.0-SNAPSHOT</sadad-card-base.version>
 		<junit.version>4.12</junit.version>
 		<model-mapper.version>1.1.0</model-mapper.version>
 		<client.security.version>3.4.1</client.security.version>
@@ -43,27 +42,6 @@
 				<version>${liberty.version}</version>
 				<type>pom</type>
 				<scope>import</scope>
-			</dependency>
-			<!-- framework -->
-			<dependency>
-				<groupId>com.sadad</groupId>
-				<artifactId>sadad-card-persistence-model</artifactId>
-				<version>${sadad-card-base.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>com.sadad</groupId>
-				<artifactId>sadad-card-services</artifactId>
-				<version>${sadad-card-base.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>com.sadad</groupId>
-				<artifactId>sadad-card-util</artifactId>
-				<version>${sadad-card-base.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>com.sadad</groupId>
-				<artifactId>sadad-card-web</artifactId>
-				<version>${sadad-card-base.version}</version>
 			</dependency>
 			<!-- modules -->
 			<dependency>
@@ -104,11 +82,6 @@
 				<artifactId>arquillian-suite-extension</artifactId>
 				<version>${arquillian.suite.extension.version}</version>
 				<scope>test</scope>
-			</dependency>
-			<dependency>
-				<groupId>ir.bmi.identity</groupId>
-				<artifactId>client-security-api</artifactId>
-				<version>${client.security.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

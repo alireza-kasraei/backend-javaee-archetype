@@ -3,12 +3,12 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.sadad</groupId>
+	<groupId>net.devk</groupId>
 	<artifactId>multi-javaee-microprofile-archetype</artifactId>
 	<version>0.1.0-SNAPSHOT</version>
 	<packaging>maven-archetype</packaging>
 	<name>Basic multi module Java EE Micro Profile archetype</name>
-	<description>Generates a *very basic* multi module micro profile Java EE project composed of a parent pom project and 3 nested modules : Model Module, Service Module, Web Module</description>
+	<description>Generates a multi module micro profile Java EE project</description>
 
 	<properties>
 		<archetype.version>3.0.1</archetype.version>
@@ -55,12 +55,4 @@
 		</plugins>
 	</build>
 
-	<!-- <distributionManagement> <repository> <id>bintray</id> <url>https://api.bintray.com/maven/open-archetypes/maven/multi-javaee6-archetype</url> 
-		</repository> </distributionManagement> -->
-	<distributionManagement>
-		<snapshotRepository>
-			<id>nexus</id>
-			<url>http://192.168.54.68:9091/nexus/content/repositories/snapshots</url>
-		</snapshotRepository>
-	</distributionManagement>
 </project>
